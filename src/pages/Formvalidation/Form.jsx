@@ -2,23 +2,26 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Form extends Component {
-  handleSubmit = (e) => {
-    e.preventDafault();
-    const action = {
-      type:'HANDLE_SUBMIT',
-      payload:{
-        sinhVien:{...this.props.formReducer.sinhVien}
-      }
-      
-    }
-    this.props.dispatch(action)
 
+
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    const action = {
+      type: "HANDLE_SUBMIT",
+      payload: {
+        sinhVien: { ...this.props.formReducer.sinhVien },
+      },
+    };
+
+    this.props.dispatch(action);
   };
 
   render() {
-    let {sinhVien} = this.props.formReducer;
+    let { sinhVien } = this.props.formReducer;
     return (
-      <form className="card" >
+      <form className="card" onSubmit={this.handleSubmit}>
         <div className="card-header bg-dark text-white fs-3 ">
           Thông tin sinh viên
         </div>
@@ -44,6 +47,7 @@ class Form extends Component {
                     this.props.dispatch(action);
                   }}
                 />
+                <p className="text-danger"> 1</p>
               </div>
               <div className="form-group">
                 <p>Số điện thoại</p>
@@ -64,8 +68,24 @@ class Form extends Component {
                     this.props.dispatch(action);
                   }}
                 />
+                <p className="text-danger"> 1</p>
+
               </div>
-              <button onClick={this.handleSubmit} className="btn btn-success mt-5">Thêm sinh viên</button>
+              <button type="submit" className="btn btn-success mt-5 mx-2">
+                Thêm sinh viên
+              </button>
+              <button onClick={()=>{
+                const action = {
+                  type:'UPDATE_SINH_VIEN',
+                  payload:{
+                    svUpdate:{...sinhVien}
+                  }
+                }
+                // console.log(sinhVien);
+                this.props.dispatch(action)
+              }} className="btn btn-primary mt-5">
+                Cập nhật sinh viên
+              </button>
             </div>
             <div className="col-6">
               <div className="form-group mb-3">
@@ -87,6 +107,8 @@ class Form extends Component {
                     this.props.dispatch(action);
                   }}
                 />
+                <p className="text-danger"> 1</p>
+
               </div>
               <div className="form-group">
                 <p>Email</p>
@@ -107,6 +129,8 @@ class Form extends Component {
                     this.props.dispatch(action);
                   }}
                 />
+                <p className="text-danger"> 1</p>
+
               </div>
             </div>
           </div>
