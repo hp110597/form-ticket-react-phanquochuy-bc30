@@ -19,7 +19,7 @@ class Table extends Component {
         </thead>
         <tbody>
           {arrSinhVien.map((sv, index) => {
-            debugger
+       
             return (
               <tr key={index}>
                 <td>{sv.id}</td>

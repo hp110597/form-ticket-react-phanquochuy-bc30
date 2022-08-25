@@ -21,7 +21,7 @@ class Form extends Component {
   render() {
     let { sinhVien } = this.props.formReducer;
     return (
-      <form className="card" onSubmit={this.handleSubmit}>
+      <form className="card">
         <div className="card-header bg-dark text-white fs-3 ">
           Thông tin sinh viên
         </div>
@@ -47,7 +47,7 @@ class Form extends Component {
                     this.props.dispatch(action);
                   }}
                 />
-                <p className="text-danger"> 1</p>
+                {/* <p className="text-danger"> 1</p> */}
               </div>
               <div className="form-group">
                 <p>Số điện thoại</p>
@@ -68,13 +68,14 @@ class Form extends Component {
                     this.props.dispatch(action);
                   }}
                 />
-                <p className="text-danger"> 1</p>
+                {/* <p className="text-danger"> 1</p> */}
 
               </div>
-              <button type="submit" className="btn btn-success mt-5 mx-2">
+              <button onClick={this.handleSubmit} className="btn btn-success mt-5 mx-2">
                 Thêm sinh viên
               </button>
-              <button onClick={()=>{
+              <button onClick={(e)=>{
+                e.preventDefault()
                 const action = {
                   type:'UPDATE_SINH_VIEN',
                   payload:{
@@ -107,7 +108,7 @@ class Form extends Component {
                     this.props.dispatch(action);
                   }}
                 />
-                <p className="text-danger"> 1</p>
+                {/* <p className="text-danger"> 1</p> */}
 
               </div>
               <div className="form-group">
@@ -129,11 +130,36 @@ class Form extends Component {
                     this.props.dispatch(action);
                   }}
                 />
-                <p className="text-danger"> 1</p>
+                {/* <p className="text-danger"> 1</p> */}
 
               </div>
             </div>
           </div>
+        </div>
+        <div className="card-footer mt-3">
+        <div className="form-group mb-3">
+                <p>Tìm kiếm</p>
+                <input
+                  name="name"
+                  id="name"
+                  value={sinhVien.name}
+                  className="w-100"
+                  style={{ padding: 5 }}
+                  onChange={(e) => {
+                    const action = {
+                      type: "HANDLE_SEARCH",
+                      payload: {
+                        id: e.target.id,
+                        value: e.target.value,
+                      },
+                    };
+                    this.props.dispatch(action);
+                  }}
+                />
+                {/* <p className="text-danger"> 1</p> */}
+
+              </div>
+
         </div>
       </form>
     );

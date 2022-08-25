@@ -1,7 +1,9 @@
 const stateDefault = {
   arrSinhVien: [
-    { id: 1, name: "Nguyễn Văn A", tel: "123", email: "a@gmailcom" },
-    { id: 2, name: "Nguyễn Văn B", tel: "456", email: "b@gmailcom" },
+    // { id: 1, name: "Nguyễn Văn A", tel: "123", email: "a@gmailcom" },
+    // { id: 2, name: "Nguyễn Văn B", tel: "456", email: "b@gmailcom" },
+    // { id: "", name:"" , tel: "", email: "" },
+    // { id: "", name: " ", tel: "", email: "" },
   ],
   sinhVien: {
     id: "",
@@ -9,12 +11,9 @@ const stateDefault = {
     tel: "",
     email: "",
   },
-  error: {
-    id: "",
-    name: "",
-    tel: "",
-    email: "",
-  },
+  arrSinhVienSearch:[
+    
+  ]
 };
 
 export const formReducer = (state = stateDefault, action) => {
@@ -34,8 +33,21 @@ export const formReducer = (state = stateDefault, action) => {
     case "HANDLE_SUBMIT": {
       let { sinhVien } = action.payload;
       let arrSinhVienUpdate = [...state.arrSinhVien];
+      let index = arrSinhVienUpdate.find((sv) => sv.id === sinhVien.id);
+      if (index) {
+        alert("Mã sinh viên không được trùng, vui lòng kiểm tra lại");
+        return { ...state };
+      } else {
+        for (let key in sinhVien) {
+          if (sinhVien[key].trim() === "") {
+            alert("Thông tin sinh viên không được để trống");
+            return { ...state };
+          }
+        }
+      }
       arrSinhVienUpdate.push(sinhVien);
       state.arrSinhVien = arrSinhVienUpdate;
+
       return { ...state };
     }
     case "XOA_SINH_VIEN": {
@@ -53,22 +65,18 @@ export const formReducer = (state = stateDefault, action) => {
       return { ...state };
     }
     case "UPDATE_SINH_VIEN": {
-      debugger;
-
       let { svUpdate } = action.payload;
       let arrSinhVienUpdate = [...state.arrSinhVien];
-      let svCapNhat = arrSinhVienUpdate.find((sv) => sv.id === svUpdate.id);
-      if (svCapNhat) {
-        for (let key in svCapNhat) {
-          svCapNhat[key] = svUpdate[key];
-        }
-        // arrSinhVienUpdate = svCapNhat;
-      }else{
-        state.arrSinhVien.push(arrSinhVienUpdate)
+      let index = arrSinhVienUpdate.findIndex((sv) => sv.id === svUpdate.id);
+      if (index !== -1) {
+        arrSinhVienUpdate[index] = svUpdate;
+      } else {
+        alert("Không được thay đổi mã sinh viên");
+        // document.getElementById('id').property='disabled'
       }
-    //   state.arrSinhVien = arrSinhVienUpdate;
 
-      console.log(state.arrSinhVien);
+      state.arrSinhVien = arrSinhVienUpdate;
+
       return { ...state };
     }
     default:
