@@ -4,13 +4,15 @@ import Form from './Form'
 import Table from './Table'
  
 class FormValidation extends Component {
+
+
   render() {
     return (
       <div className='container' >
         <h3>Form Validation</h3>
-        <Form/>
+        <Form />
         <br />
-        <Table/>
+        <Table />
       </div>
     )
   }

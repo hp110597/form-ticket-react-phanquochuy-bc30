@@ -1,7 +1,7 @@
 const stateDefault = {
   arrSinhVien: [
-    // { id: 1, name: "Nguyễn Văn A", tel: "123", email: "a@gmailcom" },
-    // { id: 2, name: "Nguyễn Văn B", tel: "456", email: "b@gmailcom" },
+    { id: 1, name: "Nguyễn Văn A", tel: "123", email: "a@gmailcom" },
+    { id: 2, name: "Nguyễn Văn B", tel: "456", email: "b@gmailcom" },
     // { id: "", name:"" , tel: "", email: "" },
     // { id: "", name: " ", tel: "", email: "" },
   ],
@@ -11,9 +11,8 @@ const stateDefault = {
     tel: "",
     email: "",
   },
-  arrSinhVienSearch:[
-    
-  ]
+  arrSinhVienSearch:[],
+ 
 };
 
 export const formReducer = (state = stateDefault, action) => {
@@ -47,7 +46,6 @@ export const formReducer = (state = stateDefault, action) => {
       }
       arrSinhVienUpdate.push(sinhVien);
       state.arrSinhVien = arrSinhVienUpdate;
-
       return { ...state };
     }
     case "XOA_SINH_VIEN": {
@@ -74,10 +72,41 @@ export const formReducer = (state = stateDefault, action) => {
         alert("Không được thay đổi mã sinh viên");
         // document.getElementById('id').property='disabled'
       }
-
       state.arrSinhVien = arrSinhVienUpdate;
-
       return { ...state };
+    } 
+    // case "HANDLE_SEARCH":{  
+    //   debugger   
+    //   let {svSearch} =action.payload
+    //   let arrSinhVienSearchUpdate=[...state.arrSinhVienSearch,svSearch]
+    //   let arrSinhVienUpdate = [...state.arrSinhVien];
+    //   // console.log(arrSinhVienSearchUpdate);
+      
+    //   arrSinhVienUpdate = arrSinhVienUpdate.filter(sv=>sv.name.toLowerCase().trim().includes(svSearch))     
+     
+    //     if(!arrSinhVienUpdate){
+    //       arrSinhVienUpdate=arrSinhVienSearchUpdate
+    //       state.arrSinhVien=arrSinhVienUpdate
+    //       return{...state}
+    //     }else{
+    //       state.arrSinhVien = arrSinhVienUpdate
+    //       return {...state}
+    //     }
+   
+    // }
+    case "HANDLE_SEARCH":{  
+        
+      let {svSearch} =action.payload
+      svSearch=svSearch.trim().toLowerCase()
+      // let arrSinhVienSearchUpdate=[...state.arrSinhVienSearch,svSearch]
+      let arrSinhVienUpdate = [...state.arrSinhVien];
+      // console.log(arrSinhVienSearchUpdate);      
+      arrSinhVienUpdate = arrSinhVienUpdate.filter(sv=>sv.name.toLowerCase().trim().includes(svSearch))     
+         state.arrSinhVienSearch = arrSinhVienUpdate
+        console.log(state);        
+
+          return {...state}
+   
     }
     default:
       return state;

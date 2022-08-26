@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Form extends Component {
-
-
-
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -19,7 +16,8 @@ class Form extends Component {
   };
 
   render() {
-    let { sinhVien } = this.props.formReducer;
+    let { sinhVien, arrSinhVienSearch } = this.props.formReducer;
+    // let {disabled} = this.props
     return (
       <form className="card">
         <div className="card-header bg-dark text-white fs-3 ">
@@ -69,22 +67,27 @@ class Form extends Component {
                   }}
                 />
                 {/* <p className="text-danger"> 1</p> */}
-
               </div>
-              <button onClick={this.handleSubmit} className="btn btn-success mt-5 mx-2">
+              <button
+                onClick={this.handleSubmit}
+                className="btn btn-success mt-5 mx-2"
+              >
                 Thêm sinh viên
               </button>
-              <button onClick={(e)=>{
-                e.preventDefault()
-                const action = {
-                  type:'UPDATE_SINH_VIEN',
-                  payload:{
-                    svUpdate:{...sinhVien}
-                  }
-                }
-                // console.log(sinhVien);
-                this.props.dispatch(action)
-              }} className="btn btn-primary mt-5">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const action = {
+                    type: "UPDATE_SINH_VIEN",
+                    payload: {
+                      svUpdate: { ...sinhVien },
+                    },
+                  };
+                  // console.log(sinhVien);
+                  this.props.dispatch(action);
+                }}
+                className="btn btn-primary mt-5"
+              >
                 Cập nhật sinh viên
               </button>
             </div>
@@ -109,7 +112,6 @@ class Form extends Component {
                   }}
                 />
                 {/* <p className="text-danger"> 1</p> */}
-
               </div>
               <div className="form-group">
                 <p>Email</p>
@@ -131,35 +133,33 @@ class Form extends Component {
                   }}
                 />
                 {/* <p className="text-danger"> 1</p> */}
-
               </div>
             </div>
           </div>
         </div>
         <div className="card-footer mt-3">
-        <div className="form-group mb-3">
-                <p>Tìm kiếm</p>
-                <input
-                  name="name"
-                  id="name"
-                  value={sinhVien.name}
-                  className="w-100"
-                  style={{ padding: 5 }}
-                  onChange={(e) => {
-                    const action = {
-                      type: "HANDLE_SEARCH",
-                      payload: {
-                        id: e.target.id,
-                        value: e.target.value,
-                      },
-                    };
-                    this.props.dispatch(action);
-                  }}
-                />
-                {/* <p className="text-danger"> 1</p> */}
-
-              </div>
-
+          <div className="form-group mb-3">
+            <p>Tìm kiếm</p>
+            <input
+              name="name"
+              id="name"
+              value={arrSinhVienSearch.name}
+              className="w-100"
+              placeholder="Nhập mã sinh viên"
+              style={{ padding: 5 }}
+              onChange={(e) => {
+                const action = {
+                  type: "HANDLE_SEARCH",
+                  payload: {
+                    // id: e.target.id,
+                    svSearch: e.target.value,
+                  },
+                };
+                console.log(action);
+                this.props.dispatch(action);
+              }}
+            />
+          </div>
         </div>
       </form>
     );
