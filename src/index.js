@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './redux/configStore';
 import FormValidation from './pages/Formvalidation/FormValidation';
+import TicketBooking from './pages/TicketBoocking/TicketBooking'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,7 @@ root.render(
   <Routes>
     <Route path='' element={<App/>}>
       <Route path='form' element={<FormValidation/>} > </Route>
+      <Route path='ticketbooking' element={<TicketBooking/>} > </Route>
     </Route>
   </Routes>
   </BrowserRouter>
