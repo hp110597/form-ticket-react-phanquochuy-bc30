@@ -145,7 +145,7 @@ class Form extends Component {
               id="name"
               value={arrSinhVienSearch.name}
               className="w-100"
-              placeholder="Nhập mã sinh viên"
+              placeholder="Nhập tên sinh viên"
               style={{ padding: 5 }}
               onChange={(e) => {
                 const action = {

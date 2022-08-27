@@ -75,25 +75,6 @@ export const formReducer = (state = stateDefault, action) => {
       state.arrSinhVien = arrSinhVienUpdate;
       return { ...state };
     } 
-    // case "HANDLE_SEARCH":{  
-    //   debugger   
-    //   let {svSearch} =action.payload
-    //   let arrSinhVienSearchUpdate=[...state.arrSinhVienSearch,svSearch]
-    //   let arrSinhVienUpdate = [...state.arrSinhVien];
-    //   // console.log(arrSinhVienSearchUpdate);
-      
-    //   arrSinhVienUpdate = arrSinhVienUpdate.filter(sv=>sv.name.toLowerCase().trim().includes(svSearch))     
-     
-    //     if(!arrSinhVienUpdate){
-    //       arrSinhVienUpdate=arrSinhVienSearchUpdate
-    //       state.arrSinhVien=arrSinhVienUpdate
-    //       return{...state}
-    //     }else{
-    //       state.arrSinhVien = arrSinhVienUpdate
-    //       return {...state}
-    //     }
-   
-    // }
     case "HANDLE_SEARCH":{  
         
       let {svSearch} =action.payload
